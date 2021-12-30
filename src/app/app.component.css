@@ -1,0 +1,19 @@
+*{
+    cursor:pointer;
+}
+.container-fluid{
+    height:100vh;
+    background-color: #1d2326;
+}
+.h2{
+    color:var(--white);
+}
+
+.line-through{
+    text-decoration: line-through;
+}
+
+.list-group-item:hover{
+    background-color:var(--gray);
+    color:var(--white);
+}
