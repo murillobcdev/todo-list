@@ -15,10 +15,9 @@ export class AppComponent {
   public formTitle: string = 'Adicionar nova tarefa';
   public form!: FormGroup;
 
-
   constructor(
     private fb: FormBuilder,
-    public datepipe: DatePipe
+    private datePipe: DatePipe
   ) {
     this.form = this.fb.group({
       title: ['', Validators.compose([
@@ -27,8 +26,7 @@ export class AppComponent {
         Validators.required
       ])]
     });
-    this.load()
-    this.handleHour()
+    this.loadItems();
   }
 
   // Funções 
@@ -36,24 +34,16 @@ export class AppComponent {
     //this.form.value => {title: 'Titulo'}
     const title = this.form.controls['title'].value;
     const id = this.todos.length + 1;
-    let date = this.datepipe.transform((new Date), 'dd/MM/yy h:mm:ss');
-    this.todos.push(new Todo(id, title, false, date));
+    let date = this.datePipe.transform((new Date), 'dd/MM/yy h:mm');
+    this.todos.push(new Todo(date, id, title, false));
     this.save();
     this.clear();
   }
-  load() {
-    this.todos = JSON.parse(localStorage.getItem('todos') || '{}');
-  }
-  handleHour() {
-    this.todos = JSON.parse(localStorage.getItem('todos') || '{}');
-    let actualDate = this.datepipe.transform((new Date), 'dd/MM/yy h:mm:ss');
-    this.todos.map(event =>{
-      console.log(event.date, actualDate)
-    })
+  loadItems() {
+    this.todos = JSON.parse(localStorage.getItem('todos') || '[]');
   }
   save() {
-    const data = JSON.stringify(this.todos);
-    localStorage.setItem('todos', data);
+    localStorage.setItem('todos', JSON.stringify(this.todos));
   }
   clear() {
     this.form.reset();
@@ -64,6 +54,7 @@ export class AppComponent {
       this.todos.splice(index, 1);
     }
     this.save();
+    this.loadItems();
   }
   markAsDone(todo: Todo) {
     todo.done = true;

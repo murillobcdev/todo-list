@@ -1,19 +1,25 @@
-*{
-    cursor:pointer;
-}
-.container-fluid{
-    height:100vh;
-    background-color: #1d2326;
-}
-.h2{
-    color:var(--white);
+* {
+  cursor: pointer;
 }
 
-.line-through{
-    text-decoration: line-through;
+.container-fluid {
+  height: 100vh;
+  background-color: #1d2326;
 }
 
-.list-group-item:hover{
-    background-color:var(--gray);
-    color:var(--white);
+.h2 {
+  color: var(--white);
+}
+
+.todo-title {
+  word-wrap: break-word;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.list-group-item:hover {
+  background-color: var(--gray);
+  color: var(--white);
 }

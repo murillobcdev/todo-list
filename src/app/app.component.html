@@ -33,26 +33,30 @@
     <ul class="list-group">
 
       <!-- item da lista -->
-      <li class="list-group-item d-flex align-items-center justify-content-between" *ngFor="let todo of todos"
+      <li class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let todo of todos"
         [ngClass]="{'bg-dark list-group-item-light' : todo.done == true}">
 
-        <div [ngClass]="{'line-through' : todo.done == true}">
-          {{todo.id}} - {{todo.title}}
+        <div class="d-flex w-100 justify-content-between" [ngClass]="{'line-through' : todo.done == true}">
+          <h5 class="mb-1 h6 badge badge-danger badge-pill">{{todo.id}} - </h5>
+          <small class="badge badge-primary badge-pill pt-1">{{todo.date}}</small>
         </div>
+        <h1 class="mb-1 h5 py-3 todo-title" [ngClass]="{'line-through' : todo.done == true}">
+          {{todo.title}}
+        </h1>
+        <div class="container d-flex justify-content-center">
+          <div class="btn-group">
+            <button (click)="remove(todo)" class="btn btn-sm btn-danger">
+              Remover
+            </button>
 
-        <div class="btn-group">
-          <button (click)="remove(todo)" class="btn btn-danger">
-            Remover
-          </button>
+            <button (click)="markAsDone(todo)" *ngIf='!todo.done' class="btn btn-sm btn-success">
+              Concluir
+            </button>
 
-          <button (click)="markAsDone(todo)" *ngIf='!todo.done' class="btn btn-outline-success">
-            Concluir
-          </button>
-
-          <button (click)="markAsUndone(todo)" *ngIf='todo.done' class="btn btn-outline-success">
-            Refazer
-          </button>
-
+            <button (click)="markAsUndone(todo)" *ngIf='todo.done' class="btn btn-sm btn-outline-success">
+              Refazer
+            </button>
+          </div>
         </div>
 
       </li>
@@ -66,6 +70,7 @@
         </div>
       </li>
       <!-- loading -->
+
     </ul>
   </div>
 
